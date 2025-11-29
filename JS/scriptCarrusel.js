@@ -10,19 +10,33 @@ fetch("JSON/carruselImagenes.json")
     // Mostrar la primera imagen
     img.src = "IMG/carrusel/" + data[indice].imagen;
 
+    // Función para cambiar imagen con animación
+    function cambiarImagen(nuevoIndice) {
+      img.classList.add("fade"); // activa animación
+      setTimeout(() => {
+        indice = nuevoIndice;
+        img.src = "IMG/carrusel/" + data[indice].imagen;
+        img.classList.remove("fade"); // quita animación
+      }, 500); // duración de la animación (0.5s)
+    }
+
     // Botón siguiente
     btnNext.addEventListener("click", () => {
-      indice = (indice + 1) % data.length;
-      img.src = "IMG/carrusel/" + data[indice].imagen;
+      cambiarImagen((indice + 1) % data.length);
     });
 
     // Botón anterior
     btnPrev.addEventListener("click", () => {
-      indice = (indice - 1 + data.length) % data.length;
-      img.src = "IMG/carrusel/" + data[indice].imagen;
+      cambiarImagen((indice - 1 + data.length) % data.length);
     });
+
+    // Cambio automático cada 2 segundos
+    setInterval(() => {
+      cambiarImagen((indice + 1) % data.length);
+    }, 3000);
   })
   .catch(error => console.error("Error cargando JSON:", error));
+
 
 //PARA "LO QUE OFRECEMOS" EN EL INDEX
 fetch("JSON/solucionIndexDatos.json")
