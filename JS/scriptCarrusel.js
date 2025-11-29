@@ -33,7 +33,7 @@ fetch("JSON/carruselImagenes.json")
     // Cambio automático cada 2 segundos
     setInterval(() => {
       cambiarImagen((indice + 1) % data.length);
-    }, 3000);
+    }, 3500);
   })
   .catch(error => console.error("Error cargando JSON:", error));
 
