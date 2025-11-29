@@ -1,3 +1,4 @@
+//PARA EL CARRUSEL EN EL INDEX
 fetch("JSON/carruselImagenes.json")
   .then(response => response.json())
   .then(data => {
@@ -19,6 +20,20 @@ fetch("JSON/carruselImagenes.json")
     btnPrev.addEventListener("click", () => {
       indice = (indice - 1 + data.length) % data.length;
       img.src = "IMG/carrusel/" + data[indice].imagen;
+    });
+  })
+  .catch(error => console.error("Error cargando JSON:", error));
+
+//PARA "LO QUE OFRECEMOS" EN EL INDEX
+fetch("JSON/solucionIndexDatos.json")
+  .then(response => response.json())
+  .then(data => {
+    const galeria = document.getElementById("solucion");
+
+    data.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `${item.icono} <strong>${item.texto}</strong>`;
+      galeria.appendChild(li);
     });
   })
   .catch(error => console.error("Error cargando JSON:", error));
